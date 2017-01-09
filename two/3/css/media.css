@@ -1,0 +1,97 @@
+
+/*.title{
+	width:1200px;
+}*/
+.titlecenter  {
+	width:984px;
+}
+/*.cc {
+	width:1198px;
+}*/
+.btop {
+	width:70%;
+	padding:10px 84px;
+}
+.titlecenterb {
+	display:none;
+}
+.titlecenterb0 {
+	display:block;
+	width:20px;
+	height:20px;
+	padding:15px 15px;
+	margin-left:24px;
+	background-color:#454648;
+	float:left;
+}
+.btopcenter a:nth-of-type(4) {
+	display: none;
+}
+.btopright {
+	display:none;
+}
+.content1 {
+	width:930px;
+}
+.amargin0 {
+	margin-left:0;
+	margin-right:20px;
+	/*padding-top:46px;*/
+}
+.content1 a:nth-of-type(1) {
+	padding-bottom:46px;
+}
+.content1 a:nth-of-type(2) {
+	padding-bottom:46px;
+}
+.content2 {
+	width:910px;
+	height:2200px;
+}
+.content {
+	/*width:1200px;*/
+	height:2980px;
+}
+.lipadding {
+	padding-right:20px;
+}
+.fy {
+	width:900px;
+}
+.sjs {
+	display:none;
+}
+.gstj {
+	width:900px;
+}
+.gstjtop {
+	width:900px;
+}
+.gstjbottom {
+	width:846px;
+	height:160px;
+}
+.bottom {
+	/*width:1100px;*/
+	padding-bottom:40px;
+}
+.bottomnav {
+	width:900px;
+}
+.bottomp {
+	width:900px;
+}
+.imgposition {
+    width: 75px;
+    height: 30px;
+    position: absolute;
+    top: 16%;
+    left: 85%;
+}
+.fixed {
+    width: 43px;
+    height: 86px;
+    position: fixed;
+    top: 72%;
+    left: 92%;
+}

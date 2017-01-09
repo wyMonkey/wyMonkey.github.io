@@ -1,0 +1,32 @@
+.kf {
+	display: none;
+}
+.titlestardiv1top {
+	background: url(../img/hp.gif) no-repeat;
+	background-size:92px 94px;
+	border:none;
+	margin:18px 0 0 28px;
+}
+.titlestardiv1top span {
+	color:#fff;
+	
+}
+em {
+	color:#fff;
+}
+.pp {
+	color:#fff;
+	/*margin-left:25px;*/
+}
+.commentlli0 div {
+	background: url(../img/y1.gif) no-repeat;
+	border:none;
+	padding:4px;
+	overflow: hidden;
+}
+.commentlli div {
+	background: url(../img/y2.gif) no-repeat;
+	border:none;
+	padding:4px;
+	overflow: hidden;
+}
