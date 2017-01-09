@@ -16,68 +16,54 @@
     var str = '',
         data = [
             [
-                { title : '第一章 表单常用代码'},
-                { url : 'one/1/index.html', title : '去除字符串左右的空格' },
-                { url : 'one/2/index.html', title : '验证用户是否输入' },
-                { url : 'one/3/index.html', title : '禁止用户输入' },
-                { url : 'one/4/index.html', title : '关闭用户中文输入法' },
-                { url : 'one/5/index.html', title : '禁止用户复制和粘贴' },
-                { url : 'one/6/index.html', title : '限制只能输入数字' },
-                { url : 'one/7/index.html', title : '限制字符串长度' },
-                { url : 'one/8/index.html', title : '仿微博提示可输入剩余字数' },
-                { url : 'one/9/index.html', title : '换行文本自动滚动' },
-                { url : 'one/10/index.html', title : 'Ctrl + Return提交表单' },
-                { url : 'one/11/index.html', title : '文本内容进行关键字过滤' },
-                { url : 'one/12/index.html', title : '全选反选少选复选框' },
-                { url : 'one/13/index.html', title : '动态操作下拉选项' },
-                { url : 'one/14/index.html', title : '级联菜单' },
-                { url : 'one/15/index.html', title : '可添加的下拉选项' }
+                { title : '表单常用代码'},
+                { url : 'one/1/index.html', title : '过滤空格' },
+                { url : 'one/2/index.html', title : '禁止复制粘贴' },
+                { url : 'one/3/index.html', title : '禁止输入' },
+                { url : 'one/4/index.html', title : '限制只能输入汉字或是数字' },
+                { url : 'one/5/index.html', title : '文字滚动' },
+                { url : 'one/6/index.html', title : 'ctrl和shift键提交表单' },
+                { url : 'one/7/index.html', title : '文本内容进行关键字过滤' },
+                { url : 'one/8/index.html', title : '动态添加上出下拉选项' },
+                { url : 'one/9/index.html', title : '动态操作下拉选项' }
             ],
             [
-                { title : '第二章 常用图片相关代码'},
-                { url : 'two/16/index.html', title : '可添加的下拉选项' },
-                { url : 'two/17/index.html', title : '图片放大镜效果' },
-                { url : 'two/18/index.html', title : '点击图片逐渐放大' }
+                { title : 'js练习'},
+                { url : 'others/1/index.html', title : '改变颜色' },
+                { url : 'others/2/index.html', title : '图片循环播放' },
+                { url : 'others/3/index.html', title : '手机短信' },
+                { url : 'others/4/index.html', title : 'v型' },
+                { url : 'others/5/index.html', title : '多组图片切换' },
+                { url : 'others/6/index.html', title : '檫出图片' },
+                { url : 'others/7/index.html', title : '仿QQ列表收缩展开' },
+                { url : 'others/8/index.html', title : '计算商品价格' },
+                { url : 'others/9/index.html', title : '带缩略图的图片切换' },
+                { url : 'others/10/index.html', title : '选项卡切换' },
+                { url : 'others/11/index.html', title : '评分' },
+                { url : 'others/12/index.html', title : '全选、反选' },
+                { url : 'others/13/index.html', title : '淘宝广告' },
+                { url : 'others/14/index.html', title : '选项卡切换' },
+                { url : 'others/15/index.html', title : '上翻时钟' },
+                { url : 'others/16/index.html', title : '文字替换查找' },
+                { url : 'others/17/index.html', title : '文字搬运工' },
+                { url : 'others/18/index.html', title : '多级菜单' },
+                { url : 'others/19/index.html', title : '点击div掉下' },
+                { url : 'others/20/index.html', title : '添加表单数据' },
+                { url : 'others/21/index.html', title : '模仿手机拍照' },
+                { url : 'others/22/index.html', title : '图片随机自动生成下落' },
+                { url : 'others/23/index.html', title : '五星评分升级' },
+                { url : 'others/24/index.html', title : '鼠标滚轮放大缩小图片' },
+                { url : 'others/25/index.html', title : '搜索提示' },
+                { url : 'others/26/index.html', title : '鼠标拖拽选中多个文件' },
+
+
             ],
             [
-                { title : '第三章 内容展示常用代码'},
-                { url : 'three/19/index.html', title : '单元行上鼠标悬停提示' },
-                { url : 'three/6/index.html', title : '无刷新切换皮肤，刷新后保存' },
-                { url : 'three/20/index.html', title : '隔行换色鼠标经过换色' },
-                { url : 'three/21/index.html', title : '添加或删除表格行' },
-//                { url : 'e/22/index.html', title : '表格的行拖动' },
-                { url : 'three/1/index.html', title : '可拖动的弹出层' },
-                { url : 'three/2/index.html', title : '选项卡轮播' },
-                { url : 'three/3/index.html', title : '模拟滚动条' },
-                { url : 'three/4/index.html', title : '缓动的对联广告' },
-                { url : 'three/5/index.html', title : '拖动滑块验证' }
-            ],
-            [
-                { title : '第四章 常用图片轮换'},
-                { url : 'slide/01/index.html', title : '百度爱玩 - 图片轮换' },
-                { url : 'slide/02/bd02.html', title : '百度爱玩 - 遮罩下拉' },
-                { url : 'slide/03/bd03.html', title : '百度爱玩 - 榜单tab切换' },
-                { url : 'slide/04/index.html', title : 'css3弹出层' },
-                { url : 'slide/05/index.html', title : '米4-活动页面' },
-                { url : 'slide/06/index.html', title : '百度爱玩 - 图片轮换' },
-                { url : 'slide/07/index.html', title : '百度微购－中秋送好礼' },
-                { url : 'slide/08/index.html', title : '商品分类' },
-                { url : 'slide/10/index.html', title : '渐显的tab菜单2' },
-                { url : 'slide/09/index.html', title : '经典图片轮换－单个滚动' },
-                { url : 'slide/13/index.html', title : '经典图片轮换－整个翻页' }
-            ],
-            [
-                { title : '第五章 移动端效果'},
-                { url : 'm/01/index.html', title : '选项卡切换' }
-            ],
-            [
-                { title : '第六章 时间日期效果'},
-                { url : 'd/03/index.html', title : '全日历' },
-                { url : 'd/04/index.html', title : 'canvas实现小时钟' }
-            ],
-            [
-                { title : '第七章 其它练习'},
-                { url : 'other/1/index.html', title : '乘法口诀输出' }
+                { title : 'css静态页'},
+                { url : 'two/1/index.html', title : '移动端-苏宁易购' },
+                { url : 'two/2/index.html', title : '去哪网' },
+                { url : 'two/3/index.html', title : '响应式-UE网' },
+                { url : 'two/4/index.html', title : '移动端-1号店' }
             ]
         ];
     for(var i = 0; i < data.length; i++){
