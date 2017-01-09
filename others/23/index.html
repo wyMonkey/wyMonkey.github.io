@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>五星评分升级</title>
+    <style>
+        ul,li{
+            padding:0;
+            margin:0;
+            list-style: none;
+        }
+        li{
+            width:40px;
+            height:40px;
+            font: 20px/2 "微软雅黑";
+            float: left;
+        }
+        .clearfix{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .wrap{
+            width:700px;
+            height:600px;
+            margin:0 auto;
+            margin-top:50px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <ul id="box" class="clearfix">
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+    </ul>
+    <ul class="wrap clearfix">
+        <li>-5</li>
+        <li>-4</li>
+        <li>-3</li>
+        <li>-2</li>
+        <li>-1</li>
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</div>
+<script>
+    window.onload = function(){
+
+        var lis = document.querySelectorAll("#box li");
+        var num = 5;
+
+        lis[5].style.color = "#FF1493";
+        function Tab(a,b){
+            var min = Math.min(a,b);
+            var max = Math.max(a,b);
+            for(var i =0 ;i<lis.length;i++){
+                if(min>=5){
+                    if(i>=5 && i<=max && a !=5){
+                        lis[i].style.color = "#FF1493";
+                    }else{
+                        lis[i].style.color= "#000000";
+                    }
+                }
+                if(max <=5){
+                    if(i<=max && i>=min){
+                        lis[i].style.color = "#FFA500";
+                    }else{
+                        lis[i].style.color= "#000000";
+                    }
+                }
+            }
+        }
+
+        for(var i = 0;i<lis.length;i++){
+            lis[i].index = i;
+            lis[i].onmouseover = function(){
+                Tab(this.index,5);
+            }
+            lis[i].onclick = function(){
+                num = this.index;
+            }
+            lis[i].onmouseout = function(){
+                Tab(num,5);
+            }
+        }
+    }
+</script>
+</body>
+</html>

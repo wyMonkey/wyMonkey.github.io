@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>图片随机自动生成下落</title>
+    <style>
+        img{
+            width:80px;
+            height:80px;
+            position: absolute;
+            /*cursor: none;*/
+            transition: 0.5s;
+        }
+    </style>
+</head>
+<body>
+<img src="../../img/1.jpg" id="img1"/>
+<script>
+    var img1 = document.getElementById("img1");
+    var arr = ["../../img/1.jpg","../../img/2.jpg","../../img/3.jpg","../../img/4.jpg","../../img/l1.jpg"];
+    var num = 0;
+    var a=0;
+    var timer = 0;
+    var l=0;
+    var t=0;
+    window.onmousemove = function(e){
+        clearInterval(timer);
+        Tab(e.clientX,e.clientY);
+    }
+    window.onmouseout =function(){
+//	    	alert("鼠标不要放在屏幕中才能开始随机播放哦！～～");
+        timer=setInterval(function(){
+            l =Math.random()*1000;
+            t =Math.random()*1000;
+            Tab(l,t);
+        },1)
+    }
+    function Tab(l,t){
+        var img2 = document.createElement("img");
+
+        a++;
+        if(a%4 == 0){
+            num++;
+            img2.src=arr[Math.floor(num/3)%arr.length];
+            document.body.appendChild(img2);
+            img2.style.left = (l-img1.offsetWidth/2)+"px";
+            img2.style.top = (t-img1.offsetHeight/2)+"px";
+            setTimeout(function(){
+                img2.style.top = (l+500)+"px"
+                img2.style.transform="scale(0)";
+            },600)
+            setTimeout(function(){
+                document.body.removeChild(img2);
+            },1000)
+        }
+    }
+
+</script>
+</body>
+</html>

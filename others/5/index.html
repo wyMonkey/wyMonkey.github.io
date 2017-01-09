@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>多组图片切换</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <style>
+        .wrap {
+            width:1000px;
+            height:500px;
+            margin:0 auto;
+            background: url(../../img/bg.jpg) no-repeat;
+            position: relative;
+        }
+        #left {
+            width:400px;
+            height:300px;
+            border:1px solid #FF1493;
+            box-shadow: 2px 2px 4px #FF1493;
+            position:absolute;
+            top:140px;
+            left:80px;
+            z-index: 5;
+        }
+        #left img {
+            width:400px;
+            height:300px;
+        }
+        #right {
+            width:300px;
+            height:300px;
+            border:1px solid #000000;
+            position:absolute;
+            top:140px;
+            left:600px;
+        }
+        #right img {
+            width:300px;
+            height:300px;
+        }
+        #next {
+            position: absolute;
+            top:100px;
+            left:300px;
+        }
+        #pre {
+            position: absolute;
+            top:100px;
+            left:100px;
+        }
+        #llt,
+        #lgt,
+        #rlt,
+        #rgt{
+            width:40px;
+            height:40px;
+            background-color:#FF1493;
+            opacity: 0.5;
+            text-align: center;
+            font:20px/2 "微软雅黑";
+            position: absolute;
+        }
+        #llt{
+            top:140px;
+            left: 0px;
+        }
+        #lgt {
+            top:140px;
+            right: 0px;
+        }
+        #rlt {
+            top:140px;
+            left: 0px;
+        }
+        #rgt {
+            top:140px;
+            right: 0px;
+        }
+        #lp {
+            position: absolute;
+            top:278px;
+            left:170px;
+            color:#FF1493;
+            font-weight: bold;
+        }
+        #rp {
+            position: absolute;
+            top:278px;
+            left:120px;
+            color:#FF1493;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div id="left">
+        <div id="llt"></div>
+        <div id="lgt"></div>
+        <img src="../../img/l1.jpg" id="imgL"/>
+        <p id="lp">左图1</p>
+    </div>
+    <div id="right">
+        <div id="rlt"></div>
+        <div id="rgt"></div>
+        <img src="../../img/r1.jpg" id="imgR"/>
+        <p id="rp">右图1</p>
+    </div>
+    <input id="pre" type="button" value="上一组"/>
+    <input id="next" type="button" value="下一组 "/>
+</div>
+<script>
+    window.onload = function() {
+        var left = document.getElementById("left");
+        var right = document.getElementById("right");
+        var next = document.getElementById("next");
+        var pre = document.getElementById("pre");
+        var llt = document.getElementById("llt");
+        var lgt = document.getElementById("lgt");
+        var rlt = document.getElementById("rlt");
+        var rgt = document.getElementById("rgt");
+        var imgL = document.getElementById("imgL");
+        var imgR = document.getElementById("imgR");
+        var arrPicl = ["../../img/l1.jpg","../../img/l2.jpg","../../img/l3.jpg","../../img/l4.jpg"];
+        var arrPicr = ["../../img/r1.jpg","../../img/r2.jpg","../../img/r3.jpg","../../img/r4.jpg"];
+        var arrLp = ["左图1","左图2","左图3","左图4"];
+        var arrRp = ["右图1","右图2","右图3","右图4"];
+        var i=0;
+        var j=0;
+
+        lgt.onclick = function(e) {
+            i= i==arrPicl.length-1 ? 0 : i+1;
+            leftFn();
+        }
+        llt.onclick = function() {
+            i = i==0 ? arrPicl.length-1 : i-1;
+            leftFn();
+        }
+        rgt.onclick = function() {
+            j= j==arrPicl.length-1 ? 0 : j+1;
+            rightFn();
+        }
+        rlt.onclick = function() {
+            j = j==0 ? arrPicl.length-1 : j-1;
+            rightFn();
+        }
+        next.onclick = function() {
+            i= i==arrPicl.length-1 ? 0 : i+1;
+            leftFn();
+            j= j==arrPicl.length-1 ? 0 : j+1;
+            rightFn();
+        }
+        pre.onclick = function() {
+            i = i==0 ? arrPicl.length-1 : i-1;
+            leftFn();
+            j = j==0 ? arrPicl.length-1 : j-1;
+            rightFn();
+        }
+        function leftFn() {
+            imgL.src = arrPicl[i];
+            lp.innerHTML = arrLp[i];
+        }
+        function rightFn() {
+            imgR.src = arrPicr[j];
+            rp.innerHTML = arrRp[j];
+        }
+
+    }
+</script>
+</body>
+</html>

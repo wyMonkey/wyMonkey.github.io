@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>点击div掉下</title>
+    <style>
+        ul,li{
+            padding:0;
+            margin:0;
+            list-style: none;
+        }
+        .wrap{
+            width:500px;
+            height:400px;
+        }
+        .wrap li {
+            width:20px;
+            height:20px;
+            background-color: #FF1493;
+            float: left;
+            margin:10px;
+            transition: 1s;
+        }
+        .clearfix:after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<ul class="wrap clearfix">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script>
+    window.onload = function(){
+        var lis = document.getElementsByTagName("li");
+        var timer1 = 0;
+        var timer2 = 0;
+        for(var i=0;i<lis.length;i++){
+            lis[i].onclick = function(){
+                this.style.marginTop = "100px";
+                prev(this);
+                next(this);
+            }
+        }
+        function prev(a){
+            timer1 = setInterval(function(){
+                if(a.previousElementSibling){
+                    a.previousElementSibling.style.marginTop = "100px";
+                }else{
+                    return;
+                }
+                if(a.previousElementSibling != true){
+                    clearInterval(timer1);
+                }
+                prev(a.previousElementSibling);
+            },300)
+        }
+        function next(a){
+            timer2=setInterval(function(){
+                if(a.nextElementSibling){
+                    a.nextElementSibling.style.marginTop = "100px";
+                }else{
+                    return;
+                }
+                if(a.nextElementSibling != true){
+                    clearInterval(timer2);
+                }
+                next(a.nextElementSibling);
+            },300)
+        }
+    }
+</script>
+</body>
+</html>

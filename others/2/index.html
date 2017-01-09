@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>图片循环播放</title>
+    <style>
+        img {
+            border:none;
+            vertical-align:top;
+        }
+        a {
+            text-decoration: none;
+        }
+        #box {
+            width:900px;
+            height:500px;
+            margin:0 auto;
+            background-color: #cecece;
+            border:1px solid #CECECE;
+        }
+        #title {
+            width:200px;
+            height:20px;
+            margin:10px auto;
+        }
+        #inp1 {
+
+        }
+        #p {
+            text-align: center;
+            font:18px/2 "微软雅黑";
+        }
+        #dw {
+            width:500px;
+            height:300px;
+            margin:0 auto;
+            position:relative;
+
+        }
+        #img {
+            width:500px;
+            height:300px;
+        }
+        #sm {
+            width:500px;
+            height:40px;
+            background-color:#fff;
+            opacity: 0.5;
+            text-align: center;
+            font:18px/40px "微软雅黑";
+            position:absolute;
+            top:260px;
+            left:0;
+        }
+        #bottom{
+            width:200px;
+            height:20px;
+            margin:20px auto;
+        }
+        #pre {
+
+        }
+        #next {
+            margin-left:40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="title">
+            <input type="button" value="顺序播放" id="inp1"/>
+            <input type="button" value="循环播放" id="inp2"/>
+        </div>
+        <p id="p">这是循环播放</p>
+        <div id="dw">
+            <img src="../../img/1.jpg" id="img"/>
+            <div id="sm">图片1</div>
+        </div>
+        <div id="bottom">
+            <input type="button" value="上一步" id="pre"/>
+            <input type="button" value="下一步" id="next"/>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            var pre = document.getElementById("pre");
+            var next = document.getElementById("next");
+            var bottom = document.getElementById("bottom");
+            var sm = document.getElementById("sm");
+            var dw = document.getElementById("dw");
+            var p = document.getElementById("p");
+            var title = document.getElementById("title");
+            var inp1 = document.getElementById("inp1");
+            var inp2 = document.getElementById("inp2");
+            var img = document.getElementById("img");
+
+            var arr=["../../img/1.jpg","../../img/2.jpg","../../img/3.jpg","../../img/4.jpg"];
+            var arrText=["图片1","图片2","图片3","图片4"];
+            var arrP=["这是循环播放","这是顺序播放"];
+
+            var num=0;
+            var a=true;
+
+            inp1.onclick=function(){
+                p.innerHTML=arrP[1];
+                a=false;
+            }
+            inp2.onclick=function(){
+                p.innerHTML=arrP[0];
+                a=true;
+            }
+            next.onclick = function() {
+                if(a==true){
+                    num++;
+                    if(num>arr.length-1){
+                        num=0;
+                    }
+                    img.src=arr[num];
+                    sm.innerHTML=arrText[num];
+                }else{
+                    num++;
+                    if(num>arr.length-1){
+                        num=arr.length-1;
+                        alert("这是最后一张了");
+                    }
+                    img.src=arr[num];
+                    sm.innerHTML=arrText[num];
+                }
+            }
+            pre.onclick = function() {
+                if(a==true){
+                    num--;
+                    if(num<0){
+                        num=arr.length-1;
+                    }
+                    img.src=arr[num];
+                    sm.innerHTML=arrText[num];
+                }else {
+                    num--;
+                    if(num<0){
+                        num=0;
+                        alert("这是最早的一张啦");
+                    }
+                    img.src=arr[num];
+                    sm.innerHTML=arrText[num];
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文字替换查找</title>
+    <style>
+        input,textarea{
+            padding:0;
+            margin:0;
+        }
+        #wrap{
+            width:800px;
+            height:800px;
+            background-color: #999999;
+            position: relative;
+            margin:0 auto;
+            margin-top:50px;
+        }
+        #box{
+            width:600px;
+            height:300px;
+            background-color: #FFF;
+            padding:20px;
+            position: absolute;
+            top:50px;
+            left:50px;
+        }
+        #b1,#b2,#b3{
+            width:60px;
+            height:40px;
+            font: 20px/40px "微软雅黑";
+            background-color: #0000FF;
+            text-align: center;
+            color: #FFFFFF;
+            position: absolute;
+            left:700px;
+
+        }
+        #b1{
+            top:40px;
+        }
+        #b2{
+            display: none;
+            top:82px;
+        }
+        #b3{
+            display: none;
+            top:124px;
+        }
+        #bottom{
+            display: none;
+            width:580px;
+            height:200px;
+            border:10px solid #FF1493;
+            position: absolute;
+            top:400px;
+            left:50px;
+            background-color: #CECECE;
+            position: absolute;
+        }
+        #th,#cz{
+            width:60px;
+            height:40px;
+            text-align: center;
+            font:20px/40px "微软雅黑";
+            color: #FFFFFF;
+            position: absolute;
+            top:20px;
+        }
+        #th{
+            left:80px;
+        }
+        #cz{
+            left:20px;
+        }
+        #hx{
+            width:540px;
+            height:4px;
+            background-color: #FF7F50;
+            position: absolute;
+            top:60px;
+            left:20px;
+        }
+        #xx{
+            width:40px;
+            height:40px;
+            font:bold 20px/2 "微软雅黑";
+            text-align: center;
+            background-color: none;
+            position: absolute;
+            top:6px;
+            left:530px;
+        }
+        #pcz,#pth{
+            position: absolute;
+            top:100px;
+            left:50px;
+        }
+        #pcz_a,#pth_a,#pth_b{
+            width:220px;
+            height:30px;
+            resize: none;
+        }
+        #pcz_b,#pth_c{
+            width:40px;
+            height:30px;
+        }
+        #colo{
+            background-color: #FF0000;
+        }
+    </style>
+
+</head>
+<body>
+<div id="wrap">
+    <div id="box">
+        万维网上的一个超媒体文档称之为一个页面（外语：page）。作为一个组织或者个人在万维网上放置开始点的页面称为主页（外语：Homepage）或首页，
+        主页中通常包括有指向其他相关页面或其他节点的指针（超级链接），所谓超级链接，就是一种统一资源定位器（Uniform Resource Locator，外语缩写：
+        URL）指针，通过激活（点击）它，可使浏览器方便地获取新的网页。这也是HTML获得广泛应用的最重要的原因之一。在逻辑上将视为一个整体的一系列页面的
+        有机集合称为网站（Website或Site）。超级文本标记语言（英文缩写：HTML）是为“网页创建和其它可在网页浏览器中看到的信息”设计的一种标记语言。
+    </div>
+    <div id="b1">展开</div>
+    <div id="b2">查找</div>
+    <div id="b3">替换</div>
+    <div id="bottom">
+        <div id="cz">查找</div>
+        <div id="th">替换</div>
+        <div id="xx">X</div>
+        <div id="hx"></div>
+        <div id="pcz">
+            <input type="text" id="pcz_a"/>
+            <input type="button" value="查找" id="pcz_b"/>
+        </div>
+        <div id="pth">
+            <input type="text" id="pth_a"/>
+            <input type="text" id="pth_b"/>
+            <input type="button"  value="替换" id="pth_c"/>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function(){
+        var box = document.getElementById("box");
+        var b1 = document.getElementById("b1");
+        var b2 = document.getElementById("b2");
+        var b3 = document.getElementById("b3");
+        var bottom = document.getElementById("bottom");
+        var cz = document.getElementById("cz");
+        var th = document.getElementById("th");
+        var xx = document.getElementById("xx");
+        var pcz = document.getElementById("pcz");
+        var pcz_a = document.getElementById("pcz_a");
+        var pcz_b = document.getElementById("pcz_b");
+        var pth = document.getElementById("pth");
+        var pth_a = document.getElementById("pth_a");
+        var pth_b = document.getElementById("pth_b");
+        var pth_c = document.getElementById("pth_c");
+        var onoff = true;
+        var arr = [];
+        var first = box.innerHTML;
+
+
+
+        b1.onclick = function(){
+            if(onoff == true){
+                b2.style.display = "block";
+                b3.style.display = "block";
+            }else{
+                if(bottom.style.display = "block"){
+                    cz.style.backgroundColor = "none";
+                    th.style.backgroundColor = "none";
+                    b2.style.display = "block";
+                    b3.style.display = "block";
+                }else{
+                    b2.style.display = "none";
+                    b3.style.display = "none";
+                }
+            }
+            onoff = !onoff;
+        }
+        function ql(){
+            cz.style.backgroundColor = "#CECECE";
+            th.style.backgroundColor = "#CECECE";
+            pth.style.display = "none";
+            pcz.style.display = "none";
+        }
+        b2.onclick = function(){
+            ql();
+            bottom.style.display = "block";
+            b2.style.display = "none";
+            b3.style.display = "none";
+            cz.style.backgroundColor = "#FF7F50";
+            pcz.style.display = "block";
+
+        }
+        b3.onclick = function(){
+            ql();
+            bottom.style.display = "block";
+            b2.style.display = "none";
+            b3.style.display = "none";
+            th.style.backgroundColor = "#FF7F50";
+            pth.style.display = "block";
+        }
+        cz.onclick = function(){
+            ql();
+            cz.style.backgroundColor = "#FF7F50";
+            pcz.style.display = "block";
+        }
+        th.onclick = function(){
+            ql();
+            th.style.backgroundColor = "#FF7F50";
+            pth.style.display = "block";
+        }
+        xx.onclick = function(){
+            bottom.style.display = "none";
+        }
+        pcz_b.onclick = function(){
+            box.innerHTML = first;
+            var arrIn = [];
+            var str = box.innerHTML;
+            var a = 0;
+            if(pcz_a.value == ""){
+                alert("内容不能为空哦！");
+            }else if((str.indexOf(pcz_a.value)) == -1){
+                alert("sorry，没有要查找的内容哦");
+            }else{
+                a = str.indexOf(pcz_a.value);
+                arrIn = str.split(pcz_a.value);
+                str = arrIn.join('<span id="colo">'+pcz_a.value+'</span>');
+                box.innerHTML = str;
+            }
+        }
+        pth_c.onclick = function(){
+            var arrPth = [];
+            var str = "";
+            var str1 = "";
+            box.innerHTML = first;
+            if(pth_a.value == ""){
+                alert("需要替换的内容不能为空哦！");
+            }else if((box.innerHTML.indexOf(pth_a.value)) <0){
+                alert("没有该内容！")
+            }
+            else{
+                arrPth = box.innerHTML.split(pth_a.value);
+                str = arrPth.join('<span id="colo">'+pth_b.value+'</span>');
+                str1 = arrPth.join(pth_b.value);
+                box.innerHTML = str;
+                first = str1;
+            }
+        }
+    }
+</script>
+</body>
+</html>

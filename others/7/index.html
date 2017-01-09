@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>仿QQ列表收缩展开</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <style>
+        div {
+            width:200px;
+            height:30px;
+            background-color: #0000FF;
+            border:1px solid #000000;
+            font:bold 18px/30px "微软雅黑";
+            text-indent: 30px;
+            position:relative;
+        }
+       .wrap{
+           width:500px;
+           height:600px;
+           margin:0 auto;
+           margin-top:50px;
+       }
+        #sj1,#sj2,#sj3 {
+            width:12px;
+            height:12px;
+            background-color:#CECECE;
+            position:absolute;
+            top:10px;
+            left:10px;
+        }
+        .qk {
+            width:200px;
+            height:30px;
+            background-color: #FFFFFF;
+            border:1px solid #000000;
+            font:14px/30px "微软雅黑";
+            text-indent: 30px;
+        }
+    </style>
+</head>
+<body>
+<section class="wrap">
+    <div id="box1">
+        我的好友
+        <span id="sj1"></span>
+    </div>
+    <ul id="zhangsan"></ul>
+    <div id="box2">
+        企业好友
+        <span id="sj2"></span>
+    </div>
+    <ul id="lisi"></ul>
+    <div id="box3">
+        黑名单
+        <span id="sj3"></span>
+    </div>
+    <ul id="zsls"></ul>
+</section>
+<script>
+    window.onload = function() {
+        var box1 = document.getElementById("box1");
+        var box2 = document.getElementById("box2");
+        var box3 = document.getElementById("box3");
+        var sj1 = document.getElementById("sj1");
+        var sj2 = document.getElementById("sj2");
+        var sj3 = document.getElementById("sj3");
+        var zhangsan = document.getElementById("zhangsan");
+        var lisi = document.getElementById("lisi");
+        var zsls = document.getElementById("zsls");
+        var divs = document.getElementsByTagName("div");
+        var arrText = ["张三","李四"]
+        var str1 = "";
+        var str2 = "";
+        var str3 = "";
+
+        for(var i=0;i<divs.length;i++){
+            divs[i].a=true;
+            divs[0].onclick = function() {
+                if(divs[1].a==false){
+                    divs[1].a=true;
+                    str2 = "";
+                }else {
+                    divs[1].a=true;
+                }
+                if(divs[2].a==false){
+                    divs[2].a=true;
+                    str3 = "";
+                }else {
+                    divs[2].a=true;
+                }
+                if(this.a==true){
+                    for(var i=0;i<5;i++){
+                        str1 += '<li class="qk">张三</li>';
+                    }
+                    zhangsan.style.display = "block";
+                    zhangsan.innerHTML = str1;
+                    box1.style.backgroundColor = "#FFFF00";
+                    box2.style.backgroundColor = "#0000FF";
+                    box3.style.backgroundColor = "#0000FF";
+                    sj1.style.transform = "rotate(45deg)";
+                    sj2.style.transform = "rotate(0deg)";
+                    sj3.style.transform = "rotate(0deg)";
+                    lisi.style.display = "none";
+                    zsls.style.display = "none";
+                }else{
+                    str1="";
+                    zhangsan.innerHTML = "";
+                    zhangsan.style.display = "none";
+                    box1.style.backgroundColor = "#0000FF";
+                    sj1.style.transform = "rotate(0deg)";
+                }
+                this.a=!this.a;
+            }
+            divs[1].onclick = function() {
+                if(divs[0].a==false){
+                    divs[0].a=true;
+                    str1 = "";
+                }else {
+                    divs[0].a=true;
+                }
+                if(divs[2].a==false){
+                    divs[2].a=true;
+                    str3 = "";
+                }else {
+                    divs[2].a=true;
+                }
+                if(this.a==true){
+                    for(var i=0;i<5;i++){
+                        str2 += '<li class="qk">李四</li>';
+                    }
+                    lisi.style.display = "block";
+                    lisi.innerHTML = str2;
+                    box1.style.backgroundColor = "#0000FF";
+                    box3.style.backgroundColor = "#0000FF";
+                    box2.style.backgroundColor = "#FFFF00";
+                    sj2.style.transform = "rotate(45deg)";
+                    sj1.style.transform = "rotate(0deg)";
+                    sj3.style.transform = "rotate(0deg)";
+                    zhangsan.style.display = "none";
+                    zsls.style.display = "none";
+                }else{
+                    str2="";
+                    lisi.innerHTML = "";
+                    lisi.style.display = "none";
+                    box2.style.backgroundColor = "#0000FF";
+                    sj2.style.transform = "rotate(0deg)";
+                }
+                this.a=!this.a;
+            }
+            divs[2].onclick = function() {
+                if(divs[1].a==false){
+                    divs[1].a=true;
+                    str2 = "";
+                }else {
+                    divs[1].a=true;
+                }
+                if(divs[0].a==false){
+                    divs[0].a=true;
+                    str1 = "";
+                }else {
+                    divs[0].a=true;
+                }
+                if(this.a==true){
+                    for(var i=0;i<2;i++){
+                        str3 += '<li class="qk">'+arrText[i]+'</li>';
+                    }
+                    zsls.style.display = "block";
+                    zsls.innerHTML = str3;
+                    box1.style.backgroundColor = "#0000FF";
+                    box2.style.backgroundColor = "#0000FF";
+                    box3.style.backgroundColor = "#FFFF00";
+                    sj3.style.transform = "rotate(45deg)";
+                    sj2.style.transform = "rotate(0deg)";
+                    sj1.style.transform = "rotate(0deg)";
+                    zhangsan.style.display = "none";
+                    lisi.style.display = "none";
+                }else{
+                    str3="";
+                    zsls.innerHTML = "";
+                    zsls.style.display = "none";
+                    box3.style.backgroundColor = "#0000FF";
+                    sj3.style.transform = "rotate(0deg)";
+                }
+                this.a=!this.a;
+            }
+        }
+    }
+</script>
+</body>
+</html>

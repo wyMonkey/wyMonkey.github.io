@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态添加上出下拉选项</title>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css" media="all"/>
+</head>
+<style>
+    .de{
+        width:600px;
+        height:300px;
+        margin:0 auto;
+        margin-top:50px;
+    }
+</style>
+<body>
+<div class="de">
+    <input type="button" value='删除' id='dele' data-target='addOptios' />
+    <select id="op">
+        <option>djdj</option>
+    </select>
+    <input type="text" value='添加' id='addOptions' data-target='addOptios' />
+    <input type="button" value='添加' id='but' data-target='addOptios' />
+</div>
+<script>
+    var addOptions = document.getElementById("addOptions");
+    var but = document.getElementById("but");
+    var op = document.getElementById("op");
+    var dele = document.getElementById("dele");
+    but.onclick=function () {
+        if(addOptions.value){
+            op.options.add(new Option(addOptions.value))
+        }
+    }
+    dele.onclick=function () {
+        op.options.remove(op.selectedIndex);
+    }
+</script>
+</body>
+</html>

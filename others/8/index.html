@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>计算商品价格</title>
+    <style>
+      .wrap{
+          width:500px;
+          height:500px;
+          margin:0 auto;
+          font-size: 30px;
+      }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <ul id="list">
+        <li>
+            <input type="button" value="-" />
+            <span>0</span>
+            <input type="button" value="+" />
+            单价：<span>1</span>元
+            小计：<span>0</span>元
+        </li>
+        <li>
+            <input type="button" value="-" />
+            <span>0</span>
+            <input type="button" value="+" />
+            单价：<span>2</span>元
+            小计：<span>0</span>元
+        </li>
+        <li>
+            <input type="button" value="-" />
+            <span>0</span>
+            <input type="button" value="+" />
+            单价：<span>5</span>元
+            小计：<span>0</span>元
+        </li>
+        <li>
+            <input type="button" value="-" />
+            <span>0</span>
+            <input type="button" value="+" />
+            单价：<span>10</span>元
+            小计：<span>0</span>元
+        </li>
+        <li>
+            <input type="button" value="-" />
+            <span>0</span>
+            <input type="button" value="+" />
+            单价：<span>12</span>元
+            小计：<span>0</span>元
+        </li>
+    </ul>
+    <p id="p1">
+        商品总计<span id="jianshu">0</span>件<br />
+        共花费<span id="zongjia">0</span>元<br />
+        其中最贵的商品单价是<span id="expen">0</span>元
+    </p>
+</div>
+<script>
+    var lis = document.querySelectorAll("#list li");
+    var jianshu = document.getElementById("jianshu");
+    var zongjia = document.getElementById("zongjia");
+    var expen = document.getElementById("expen");
+    var list_spans = document.querySelectorAll("#list span");
+    var sum = 0;
+    for (var i = 0; i < lis.length; i++) {
+        tabFn(i);
+    }
+    function tabFn(a){
+        var inps = lis[a].getElementsByTagName("input");
+        var sp = lis[a].getElementsByTagName("span")[0];
+        var xiaoji = lis[a].getElementsByTagName("span")[2];
+        var danjia = lis[a].getElementsByTagName("span")[1];
+        var n = 0;
+        inps[0].onclick = function(){
+            n--;
+            if( n < 0 ){
+                n = 0;
+            }
+            sp.innerHTML = n;
+            xiaoji.innerHTML = n*danjia.innerHTML;
+            count();
+        }
+        inps[1].onclick = function(){
+            n++;
+            sp.innerHTML = n;
+            xiaoji.innerHTML = n*danjia.innerHTML;
+            count();
+        }
+    }
+    function count(){
+        var sum2 = 0;//清零
+        var sumPrice = 0;
+        var span = document.querySelectorAll("#list span");
+        var arr = [];
+        var arr2 = [];
+        var max = 0;
+        for (var i = 0; i < span.length; i++) {
+            if(i%3 == 0){
+                arr.push(span[i]);
+            }
+            if(i%3 == 2){
+                arr2.push(span[i]);
+            }
+        }
+        for (var i = 0; i < arr.length; i++) {
+            sum2 += parseFloat(arr[i].innerHTML);
+            sumPrice += parseFloat(arr2[i].innerHTML);
+            if(arr[i].innerHTML != 0){//件数不为0
+                if(parseFloat(list_spans[3*i+1].innerHTML)>max){//件数不为0 对应的单价比max要大
+                    max = parseFloat(list_spans[3*i+1].innerHTML);
+                }
+            }
+        }
+        jianshu.innerHTML = sum2;
+        zongjia.innerHTML = sumPrice;
+        expen.innerHTML = max;
+    }
+</script>
+</body>
+</html>

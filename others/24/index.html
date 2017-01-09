@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标滚轮放大缩小图片</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<img src="../../img/1.jpg" alt="">
+<script>
+    window.onload = function() {
+
+        var img = document.querySelector('img');
+
+        setPos();
+
+        var w = img.width;
+        var h = img.height;
+        var scale = 1;
+
+        wheel( img, function() {
+            scale += 0.1;
+            if (scale > 2) {
+                scale = 2;
+            }
+            setWidthHeight();
+            setPos();
+        }, function() {
+            scale -= 0.1;
+            if (scale < 0.3) {
+                scale = 0.3;
+            }
+            setWidthHeight();
+            setPos();
+        } );
+
+        //封装鼠标滚轮的函数
+        function wheel(element, upCallback, downCallback) {
+            element.onmousewheel = doWheel;
+            if (element.addEventListener) {
+                element.addEventListener('DOMMouseScroll', doWheel, false);
+            }
+
+            function doWheel(e) {
+                var flag = true;
+
+                if (e.wheelDelta) {
+                    flag = e.wheelDelta > 0 ? true : false;
+                } else {
+                    flag = e.detail < 0 ? true : false;
+                }
+
+                if (flag) {
+                    upCallback && upCallback();
+                } else {
+                    upCallback && downCallback();
+                }
+
+                e.preventDefault();
+                return false;
+            }
+        }
+
+        //根据比例计算宽高
+        function setWidthHeight() {
+            img.style.width = w * scale + 'px';
+            img.style.height = h * scale + 'px';
+        }
+
+        //根据图片的宽高设置图片的位置 - 居中
+        function setPos() {
+
+            //获取图片的大小
+            var width = img.width;
+            var height = img.height;
+
+            //获取窗口可视区的大小
+            var windowWidth = window.innerWidth;   //document.documentElement.clientWidth
+            var windowHeight = window.innerHeight;
+
+            //居中 : (窗口可视区大小-图片的大小) / 2 => left/top
+            img.style.left = ( windowWidth - width ) / 2 + 'px';
+            img.style.top = ( windowHeight - height ) / 2 + 'px';
+
+        }
+
+    }
+</script>
+</body>
+</html>

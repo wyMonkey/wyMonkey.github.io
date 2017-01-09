@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>带缩略图的图片切换</title>
+    <style>
+        body{
+            cursor: pointer;
+        }
+        ul,li {
+            padding:0px;
+            margin:0px;
+        }
+        li {
+            list-style: none;
+        }
+        img {
+            border: none;
+            vertical-align: top;
+        }
+        #box {
+            width:650px;
+            height:432px;
+            position: relative;
+            margin:0 auto;
+        }
+        #img {
+            width:650px;
+            height:432px;
+        }
+        #lt {
+            width:50px;
+            height:50px;
+            background-color: #fff;
+            border-radius: 25px;
+            color:#FF1493;
+            font:28px/50px "微软雅黑";
+            text-align: center;
+            opacity: 0.6;
+            position: absolute;
+            top:190px;
+            left:10px;
+        }
+        #gt {
+            width:50px;
+            height:50px;
+            background-color: #fff;
+            border-radius: 25px;
+            color:#FF1493;
+            font:28px/50px "微软雅黑";
+            text-align: center;
+            opacity: 0.6;
+            position: absolute;
+            top:190px;
+            left:592px;
+        }
+        ul {
+            width:200px;
+            height:40px;
+            position: absolute;
+            top:360px;
+            left:220px;
+        }
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        li {
+            width:20px;
+            height:20px;
+            border-radius: 10px;
+            background-color: #F00;
+            margin-top:10px;
+            margin-left:20px;
+            float: left;
+            position: relative;
+        }
+        .section {
+            width:50px;
+            height:50px;
+            position: absolute;
+            top:-60px;
+            left:-18px;
+        }
+        .section img {
+            width:50px;
+            height:50px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <img  src="../../img/r4.jpg" id="img"/>
+    <div id="lt">&lt;</div>
+    <div id="gt">&gt;</div>
+    <ul>
+        <li style="background-color: #0000FF;">
+            <!--<section>
+                <img src="img/huaduo.jpg" />
+            </section>-->
+        </li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script>
+    window.onload = function() {
+        var box = document.getElementById("box");
+        var img = document.getElementById("img");
+        var lt = document.getElementById("lt");
+        var gt = document.getElementById("gt");
+        var lis = document.getElementsByTagName("li");
+        var arrPic=["../../img/r4.jpg","../../img/1.jpg","../../img/2.jpg","../../img/3.jpg","../../img/4.jpg"];
+        var num=0;
+//			    var onoff = true;
+        gt.onclick = function() {
+            num++;
+            if(num==arrPic.length){
+                num=0;
+            }
+            img.src = arrPic[num];
+            for(var i=0;i<lis.length;i++){
+                lis[i].style.backgroundColor = "#FF0000";
+            }
+            lis[num].style.backgroundColor = "#0000FF";
+        }
+        lt.onclick = function() {
+            num--;
+            if(num<0){
+                num=arrPic.length-1;
+            }
+            img.src = arrPic[num];
+            for(var i=0;i<lis.length;i++){
+                lis[i].style.backgroundColor = "#FF0000"; //红色
+            }
+            lis[num].style.backgroundColor = "#0000FF"; //蓝色
+        }
+        for(var i=0;i<lis.length;i++){
+            lis[i].a = i;
+            lis[i].onmouseover = function() {
+                for(var i=0;i<lis.length;i++){
+                    lis[i].innerHTML = "";
+                }
+                this.style.backgroundColor = "#CECECE";  //灰色
+                this.innerHTML = '<section class="section"><img src='+arrPic[this.a]+' /></section>';
+            }
+            lis[i].onclick = function() {
+                img.src=arrPic[this.a];
+                for(var i=0;i<lis.length;i++){
+                    lis[i].style.backgroundColor = "#FF0000";
+                }
+                this.style.backgroundColor = "#0000FF";
+                this.innerHTML = '';
+                num = this.a;
+                this.onmouseout = function(){
+                    if(num ==this.a){
+                        this.style.backgroundColor = "#0000FF";
+                    }else{
+                        this.style.backgroundColor = "#FF0000";
+                    }
+                    this.innerHTML = '<section class="section" style="display:none;"><img src='+arrPic[this.a]+' /></section>';
+                }
+            }
+            lis[i].onmouseout = function(){
+                if(num == this.a){
+                    this.style.backgroundColor = "#0000FF";
+                }else{
+                    this.style.backgroundColor = "#FF0000";
+                }
+                this.innerHTML = '<section class="section" style="display:none;"><img src='+arrPic[this.a]+' /></section>';
+            }
+        }
+    }
+</script>
+</body>
+</html>

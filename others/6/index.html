@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>檫出图片06</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <style>
+        #box {
+            width:500px;
+            height:500px;
+            /*border:1px solid #000;*/
+            margin:0 auto;
+            background:url(../../img/3.jpg) no-repeat;
+            -webkit-background-size:500px 500px;
+            background-size:500px 500px;
+            position: relative;
+        }
+        #box li {
+            width:50px;
+            height:50px;
+            background:url(../../img/ice.png) no-repeat #CECECE 3px 3px;
+            -webkit-background-size:50px 50px;
+            background-size:50px 50px;
+            position: absolute;
+            transition:.5s;
+        }
+        #box li img {
+            width:50px;
+            height:50px;
+        }
+    </style>
+</head>
+<body>
+<ul id="box">
+
+</ul>
+<script>
+    window.onload = function() {
+        var box = document.getElementById("box");
+        var li = document.getElementsByTagName("li");
+
+        function divFn() {
+            for(var i=0;i<10;i++){
+                for(var j=0;j<10;j++){
+                    box.innerHTML += '<li style="top:'+i*50+'px;left:'+50*j+'px;"></li>';
+                }
+            }
+        }
+        divFn();
+        for(var i=0;i<li.length;i++){
+            li[i].onmouseover = function() {
+                this.style.width="0px";
+                this.style.height="0px";
+                this.style.transform="rotate(45deg)";
+            }
+        }
+    }
+</script>
+</body>
+</html>

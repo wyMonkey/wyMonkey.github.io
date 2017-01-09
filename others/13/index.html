@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>淘宝广告</title>
+    <style>
+        ul,li {
+            padding:0;
+            margin:0;
+        }
+        li {
+            list-style: none;
+        }
+        .wrap {
+            width:500px;
+            height:200px;
+            border: 1px solid #000000;
+            position: relative;
+            margin:0 auto;
+            margin-top:100px;
+        }
+        .ulone {
+            position: absolute;
+            top:20px;
+            left:20px;
+        }
+        .ulone li {
+            width:60px;
+            height:30px;
+            border:1px solid #808000;
+            text-align: center;
+            font:18px/20px "微软雅黑";
+            margin-bottom: 6px;
+        }
+        .div {
+            width:280px;
+            height:100px;
+            position: absolute;
+            top:20px;
+            left:100px;
+        }
+        .div img {
+            width:280px;
+            height:100px;
+        }
+        .ultwo {
+            position: absolute;
+            top:20px;
+            left:400px;
+        }
+        .ultwo li {
+            width:60px;
+            height:30px;
+            border:1px solid #808000;
+            text-align: center;
+            font:18px/20px "微软雅黑";
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="ulone">
+        <li>连衣裙</li>
+        <li>雪纺</li>
+        <li>裤子</li>
+    </ul>
+    <div class="div">
+        <img src="" />
+    </div>
+    <ul class="ultwo">
+        <li>太阳</li>
+        <li>月亮</li>
+        <li>星星</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    window.onload = function() {
+        var uls = document.getElementsByTagName("ul");
+        var lis = document.getElementsByTagName("li");
+        var img = document.getElementsByTagName("img")[0];
+        var a=0;
+        var timer = 0;
+        //初始化
+        fn();
+        function fn() {
+            lis[a].style.backgroundColor = "#000000";
+            lis[a].style.color ="#FFFFFF";
+            img.src = "../../img/img1.gif";
+        }
+
+        //鼠标移入
+        for(var i=0;i<lis.length;i++){
+            lis[i].index = i;
+            lis[i].onmouseover = function() {
+                clearInterval(timer);
+                lis[a].style.backgroundColor = "#FFF";
+                lis[a].style.color = "#000";
+                img.src="../../img/img1"+(a+1)+".gif";
+
+                this.style.backgroundColor = "#000";
+                this.style.color = "#FFFFFF";
+                img.src = "../../img/img"+(this.index+1)+".gif";
+                a = this.index;
+            }
+        }
+
+        //鼠标移出
+        for(var i=0;i<lis.length;i++){
+            lis[i].index = i;
+            lis[i].onmouseout = function(){
+                a = this.index;
+                timer = setInterval(function(){
+                    lis[a].style.backgroundColor = "#FFF";
+                    lis[a].style.color = "#000";
+                    img.src="../../img/img1"+(a+1)+".gif";
+                    if(a>4){
+                        a=-1;
+                    }
+                    lis[a+1].style.backgroundColor = "#000";
+                    lis[a+1].style.color = "#FFFFFF";
+                    img.src = "../../img/img"+(lis[a+1].index+1)+".gif";
+                    a = lis[a+1].index;
+                },1000);
+
+            }
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>v型</title>
+    <style>
+        #wrap {
+            width:500px;
+            height:500px;
+            margin:0 auto;
+            margin-top:10px;
+            border:5px solid #000;
+            position:relative;
+        }
+        #inp {
+            position: absolute;
+            top:0;
+            left:700px;
+            width:50px;
+            height:26px;
+        }
+        #wrap div {
+            width:100px;
+            height:100px;
+            background-color:pink;
+            text-align: center;
+            font:50px/2 "微软雅黑";
+            position:absolute;
+        }
+    </style>
+
+</head>
+<body>
+<input type="button" value="click" id="inp"/>
+<div id="wrap">
+
+</div>
+<script>
+    window.onload = function() {
+        var inp = document.getElementById("inp");
+        var wrap = document.getElementById("wrap");
+        var n=0;
+
+        inp.onclick = function() {
+            if(n%4==0){
+                upFn();
+            }
+            if(n%4==1){
+                downFn();
+            }
+            if(n%4==2){
+                leftFn();
+            }
+            if(n%4==3){
+                rightFn();
+                n=-1;
+            }
+            n++;
+        };
+        function upFn() {
+            wrap.innerHTML="";
+            for(var i=0;i<5;i++){
+                if(i<3){
+                    wrap.innerHTML += '<div style="left:'+(100*i)+'px;top:'+(100*i)+'px">'+i+'</div>';
+                }else {
+                    wrap.innerHTML += '<div style="top:'+(400-(100*i))+'px;left:'+(100*i)+'px">'+i+'</div>';
+                }
+            }
+        };
+        function downFn() {
+            wrap.innerHTML="";
+            for(var i=0;i<5;i++){
+                if(i<3){
+                    wrap.innerHTML += '<div style="left:'+(100*i)+'px;bottom:'+(100*i)+'px">'+i+'</div>';
+                }else {
+                    wrap.innerHTML += '<div style="bottom:'+(400-(100*i))+'px;left:'+(100*i)+'px">'+i+'</div>';
+                }
+            }
+        };
+        function leftFn() {
+            wrap.innerHTML="";
+            for(var i=0;i<5;i++){
+                if(i<3){
+                    wrap.innerHTML += '<div style="left:'+(100*i)+'px;top:'+(100*i)+'px">'+i+'</div>';
+                }else {
+                    wrap.innerHTML += '<div style="bottom:'+(400-(100*i))+'px;left:'+(400-(100*i))+'px">'+i+'</div>';
+                }
+            }
+        };
+        function rightFn() {
+            wrap.innerHTML="";
+            for(var i=0;i<5;i++){
+                if(i<3){
+                    wrap.innerHTML += '<div style="right:'+(100*i)+'px;top:'+(100*i)+'px">'+i+'</div>';
+                }else {
+                    wrap.innerHTML += '<div style="top:'+(100*i)+'px;right:'+(400-(100*i))+'px">'+i+'</div>';
+                }
+            }
+        };
+    };
+</script>
+</body>
+</html>

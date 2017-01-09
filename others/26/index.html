@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标拖拽选中多个文件</title>
+    <style type="text/css">
+        #div1 {
+            margin: 100px;
+        }
+        #div1 div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #f90;
+            margin: 10px;
+            float: left;
+        }
+        #div1 div.checked {
+            background: #f90;
+        }
+        .box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: 1px solid blue;
+            background: rgba(0, 0, 255, .4);
+        }
+        #tips {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            line-height: 30px;
+            border-radius: 50%;
+            background: green;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<div id="div1">
+
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+</div>
+
+<div id="tips"></div>
+<script type="text/javascript">
+
+    window.onload = function() {
+
+        var divs = document.querySelectorAll("#div1 div");
+        var tips = document.getElementById('tips');
+        var selectedElement = [];
+
+        document.onmousedown = function(e) {
+            var flag = selectedElement.indexOf(e.target) == -1 ? false : true;
+            var box = null;
+            var disX = e.clientX;
+            var disY = e.clientY;
+
+            if (!box) {
+                box = document.createElement('div');
+                box.className = 'box';
+                box.style.left = '-9999px';
+                box.style.top = '-9999px';
+                document.body.appendChild(box);
+            }
+
+            document.onmousemove = function(e) {
+                if (flag) {
+                    //拖拽
+                    tips.style.display = 'block';
+                    tips.innerHTML = selectedElement.length;
+                    tips.style.left = e.clientX + 20 + 'px';
+                    tips.style.top = e.clientY + 20 + 'px';
+                } else {
+                    //画方框
+                    selectedElement = [];
+
+                    box.style.width = Math.abs(e.clientX - disX) + 'px';
+                    box.style.height = Math.abs(e.clientY - disY) + 'px';
+                    box.style.left = Math.min(e.clientX, disX) + 'px';
+                    box.style.top = Math.min(e.clientY, disY) + 'px';
+
+                    //检测碰撞
+                    var T1 = box.offsetTop;
+                    var L1 = box.offsetLeft;
+                    var B1 = T1 + box.offsetHeight;
+                    var R1 = L1 + box.offsetWidth;
+
+                    for (var i=0; i<divs.length; i++) {
+                        var T2 = divs[i].offsetTop;
+                        var L2 = divs[i].offsetLeft;
+                        var B2 = T2 + divs[i].offsetHeight;
+                        var R2 = L2 + divs[i].offsetWidth;
+
+                        if (R1 < L2 || L1 > R2 || B1 < T2 || T1 > B2) {
+                            var _index = selectedElement.indexOf(divs[i]);
+                            if (_index != -1) {
+                                selectedElement.splice(_index, 1);
+                            }
+                            divs[i].className = '';
+                        } else {
+                            divs[i].className = 'checked';
+                            selectedElement.push(divs[i]);
+                        }
+                    }
+
+                    document.title = (selectedElement.length);
+
+                }
+            }
+
+            document.onmouseup = function() {
+                document.body.removeChild(box);
+                box = null;
+                tips.style.display = 'none';
+                document.onmousemove = null;
+            }
+
+            return false;
+        }
+
+
+
+    }
+
+</script>
+</body>
+</html>

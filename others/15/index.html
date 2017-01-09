@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>上翻时钟</title>
+    <style>
+        ul,li {
+            padding:0;
+            margin:0;
+            list-style: none;
+        }
+        ul{
+            margin:80px 90px;
+            font-size:0;
+        }
+        li {
+            width:50px;
+            height:70px;
+            display: inline-block;
+            position: relative;
+            top:0;
+            overflow: hidden;
+            transition: 2s;
+        }
+        .wrap{
+            width:800px;
+            height:500px;
+            margin:0 auto;
+            margin-top:50px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="wrap">
+    <ul>
+        <li>
+            <img src="../../img/00.jpg"/>   //0
+            <img src="../../img/00.jpg"/>
+        </li>
+        <li>
+            <img src="../../img/00.jpg"/>   //2
+            <img src="../../img/00.jpg"/>
+        </li>
+        <li>
+            <img src="../../img/cc.jpg"/>   //4
+            <img src="../../img/cc.jpg"/>
+        </li>
+        <li>
+            <img src="../../img/00.jpg"/>   //6
+            <img src="../../img/00.jpg"/>
+        </li>
+        <li>
+            <img src="../../img/00.jpg"/>   //8
+            <img src="../../img/00.jpg"/>
+        </li>
+        <li>
+            <img src="../../img/cc.jpg"/>   //10
+            <img src="../../img/cc.jpg"/>
+        </li>
+        <li>
+            <img src="../../img/00.jpg"/>   //12
+            <img src="../../img/00.jpg"/>
+        </li>
+        <li>
+            <img src="../../img/00.jpg"/>   //14
+            <img src="../../img/00.jpg"/>
+        </li>
+    </ul>
+</div>
+<script>
+    window.onload = function() {
+        var lis = document.getElementsByTagName("li");
+        var imgs = document.getElementsByTagName("img");
+        var onoff =true;
+
+        var past = new Date();
+        var hour = aT(past.getHours());
+        var min = aT(past.getMinutes());
+        var sec = aT(past.getSeconds());
+        var str1 = hour +":"+min+":"+sec;
+        setInterval(nowT,1000);
+        function nowT(){
+            var now = new Date();
+            var hour = aT(now.getHours());
+            var min = aT(now.getMinutes());
+            var sec = aT(now.getSeconds());
+            var str2 = hour +":"+min+":"+sec;
+            var arrN = differ(str1,str2);
+            for(var i=0;i<arrN.length;i++){
+                var kk = arrN[i][1];
+                var kkkk = kk + kk ;
+                Gun(arrN[i][0],"../../img/"+kkkk+".jpg")
+
+            }
+            str1 = str2;
+        }
+
+
+        //对比
+        function differ(a,b) {
+            var arr = [];
+            for(var i=0;i<a.length;i++){
+                if(a[i] != b[i]){
+                    arr.push([i,b[i]]);
+                }
+            }
+
+            return arr;
+        }
+        //为非零部分添加0
+        function aT(n) {
+            if(n<10){
+                return "0"+n;
+            }else{
+                return ""+n;
+            }
+        }
+        //把获取的时间展示出来
+        for(var i=0;i<str1.length;i++){
+            if(i==2 || i == 5){
+                imgs[4].src = "../../img/00.jpg";
+                imgs[10].src = "../../img/00.jpg";
+            }else{
+                var jj = str1[i];
+                var jjjj = jj + jj;
+                imgs[2*i].src = "../../img/"+jjjj+".jpg";
+            }
+        }
+
+        //无缝滚动
+//				Gun(7,"imgg/c.jpg");
+        function Gun(index,nextSrc){
+            var img1 = lis[index].getElementsByTagName("img")[0];
+            var img2 = lis[index].getElementsByTagName("img")[1];
+            img1.src = nextSrc;
+            miaovMove(lis[index],{"top":-70},1000,"linear",function() {
+                lis[index].style.top=0;
+                img2.src = nextSrc;
+            });
+        }
+
+
+
+        //:闪动
+        setInterval(function(){
+            imgs[4].src = onoff ? "../../img/bb.jpg" : "../../img/cc.jpg";
+            imgs[10].src = onoff ? "../../img/bb.jpg" : "../../img/cc.jpg";
+            onoff = !onoff;
+        },1000)
+
+
+        function miaovMove(obj,attrs,duration,fx,endFn){
+            var j = {};
+            for(var att in attrs ){
+                j[att] = {};
+                j[att].b =  parseFloat(getComputedStyle(obj)[att]);
+                j[att].c = attrs[att] - j[att].b;//运行总路程
+            }
+            var d = duration;//持续时间
+            var past = new Date();
+            obj.timer = setInterval(function(){
+                var now = new Date();
+                var t = now - past;//已过时间
+                if(t > d){
+                    t = d;
+                }
+                for(var att in j){
+                    var b = j[att].b;
+                    var c = j[att].c;
+                    var v = Tween[fx](t, b, c, d);
+                    if( att == "opacity" ){
+                        obj.style[att] = v;
+                    }else{
+                        obj.style[att] = v + "px";
+                    }
+                }
+                if(t==d){
+                    clearInterval(obj.timer);
+                    endFn && endFn();
+                }
+            },20)
+        }
+        var Tween = {
+            linear: function (t, b, c, d){  //匀速
+                return c*t/d + b;
+            },
+            easeIn: function(t, b, c, d){  //加速曲线
+                return c*(t/=d)*t + b;
+            },
+            easeOut: function(t, b, c, d){  //减速曲线
+                return -c *(t/=d)*(t-2) + b;
+            },
+            easeBoth: function(t, b, c, d){  //加速减速曲线
+                if ((t/=d/2) < 1) {
+                    return c/2*t*t + b;
+                }
+                return -c/2 * ((--t)*(t-2) - 1) + b;
+            },
+            easeInStrong: function(t, b, c, d){  //加加速曲线
+                return c*(t/=d)*t*t*t + b;
+            },
+            easeOutStrong: function(t, b, c, d){  //减减速曲线
+                return -c * ((t=t/d-1)*t*t*t - 1) + b;
+            },
+            easeBothStrong: function(t, b, c, d){  //加加速减减速曲线
+                if ((t/=d/2) < 1) {
+                    return c/2*t*t*t*t + b;
+                }
+                return -c/2 * ((t-=2)*t*t*t - 2) + b;
+            },
+            elasticIn: function(t, b, c, d, a, p){  //正弦衰减曲线（弹动渐入）
+                if (t === 0) {
+                    return b;
+                }
+                if ( (t /= d) == 1 ) {
+                    return b+c;
+                }
+                if (!p) {
+                    p=d*0.3;
+                }
+                if (!a || a < Math.abs(c)) {
+                    a = c;
+                    var s = p/4;
+                } else {
+                    var s = p/(2*Math.PI) * Math.asin (c/a);
+                }
+                return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+            },
+            elasticOut: function(t, b, c, d, a, p){    //正弦增强曲线（弹动渐出）
+                if (t === 0) {
+                    return b;
+                }
+            }
+        }
+
+    }
+</script>
+</body>
+</html>

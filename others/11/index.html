@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>评分14</title>
+    <!--
+        1.数字变量
+        2.（1）大清除
+           （2）清除上一个
+        3.自定义属性及本省的i
+        （
+            for(var i=0;i<spans.length;i++){
+                spans[i].index = i;
+                if(i>spans[i].index)
+            }
+            ）
+        4.布尔值 true\false
+    -->
+    <style>
+        body{
+            /*color: #0000FF; //蓝色(默认)
+            color:#FFFF00;  //黄色
+            color:#FF1493;  //紫红色*/
+        }
+        .wrap{
+            width:600px;
+            height:100px;
+            margin:0 auto;
+            margin-top:100px;
+            font-size: 50px;
+        }
+        span{
+            cursor: pointer;
+            color:#0000FF;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <span>★</span>
+    <span>★</span>
+    <span>★</span>
+    <span>★</span>
+    <span>★</span>
+</div>
+<script>
+    window.onload = function() {
+        var spans = document.getElementsByTagName("span");
+        var num = -1;
+
+        for(var i=0;i<spans.length;i++){
+            spans[i].index = i;
+            spans[i].onmouseover = function() {
+                fnTab(this.index);
+            }
+            spans[i].onclick = function() {
+                num = this.index;
+            }
+            spans[i].onmouseout = function() {
+                fnTab(num);
+
+            }
+        }
+        function fnTab(a){
+            for(var i=0;i<spans.length;i++){
+                if(i>a){
+                    spans[i].style.color = "#0000FF";
+                }else{
+                    if(a<2){
+                        spans[i].style.color = "#FF1493";
+                    }else{
+                        spans[i].style.color = "#FFFF00";
+                    }
+                }
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
